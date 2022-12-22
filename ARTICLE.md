@@ -115,9 +115,6 @@ Copyright (C) 2022 Takym.
 * [アプリケーション配置用に単一ファイルを作成する - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/core/deploying/single-file/overview)
 * [COSMOS - COSMOS](https://www.gocosmos.org/)
 
-## 脚注
-[^1]: [.NET Glossary](https://github.com/dotnet/runtime/blob/main/docs/project/glossary.md) には「Platform Adaptation Layer」と書かれているが、「Platform Abstraction Layer」と表現される場合もある。厳密な使い分けがある可能性もあるが、有力な情報は得られなかった。
-
 ## 余談
 * これまでの記事は敬体で書いていましたが、今回は常体で書きました。そのため少し不安が残ります。
 	* 余談はとても個人的な内容になりますので敬体で書きました。
@@ -134,3 +131,6 @@ Copyright (C) 2022 Takym.
 * 2018年12月25日
 	* [TakymSystems](https://takymsystems.blog.fc2.com/blog-entry-86.html)
 	* [takym.code.blog](https://takym.code.blog/2018/12/25/os%e3%81%af%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%bd%e3%83%bc%e3%82%b9%e3%81%ab%e3%81%99%e3%81%b9%e3%81%8d%e3%81%8b%ef%bc%9f/)
+
+## 脚注
+[^1]: [.NET Glossary](https://github.com/dotnet/runtime/blob/main/docs/project/glossary.md) には「Platform Adaptation Layer」と書かれているが、「Platform Abstraction Layer」と表現される場合もある。厳密な使い分けがある可能性もあるが、有力な情報は得られなかった。
