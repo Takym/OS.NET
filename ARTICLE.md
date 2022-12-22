@@ -41,10 +41,12 @@ Copyright (C) 2022 Takym.
 
 ### 欠点
 * .NET 7 のソースコードは膨大である為、移植には長い時間を要する。
-* UEFI の API を直接触る事ができない。
+* 移植の方法次第で、UEFI の API を直接触る事ができなくなる可能性がある。
 
 ## .NET 7 のランタイムライブラリのソースコードの一部をコピーする方法
 * ランタイムライブラリから必要な部分のソースコードのみをコピーし、Native AOT を用いる方法を考察する。
+* .NET 7 の機能の大半は C# で書かれており、C++ で書かれている部分は仮想マシン、JIT コンパイラ、ガベージコレクション、プラットフォーム抽象化レイヤー（PAL[^1]）等のみである。
+* よって、C# で書かれている部分のソースコードのみでも充分だろう。
 
 ### 利点
 * ランタイムライブラリの一部が使用できる。
@@ -56,6 +58,18 @@ Copyright (C) 2022 Takym.
 * ランタイムライブラリの更新に手間が掛かる。
 	* ライブラリに更新があった際は、再びソースコードをコピーする必要がある。
 * 動的リンクができない。
+
+## Roslyn を改造する方法
+* オープンソースの C# コンパイラである [Roslyn](https://github.com/dotnet/roslyn) を改造し、UEFI アプリケーションを出力する機能を付け加える方法を考察する。
+
+### 利点
+* Native AOT と比べて自由度が高い。
+* ランタイムライブラリを静的リンクできる様に改造する事もできる。
+	* Native AOT と[単一ファイルアプリケーション](https://learn.microsoft.com/dotnet/core/deploying/single-file/overview)は併用できない。
+
+### 欠点
+* Roslyn を改造する手間が掛かる。
+* コンパイルを切り替える等の特殊な設定が必要になる。
 
 ## 最小の Linux カーネルを使う方法
 * 最小の Linux カーネルの上で .NET 7 を実行する方法を考察する。
@@ -69,6 +83,7 @@ Copyright (C) 2022 Takym.
 
 ### 欠点
 * カーネルそのものは開発しないので、自作 OS の開発であると言えるか微妙である。
+* UEFI の API を直接触る事ができない。
 
 ## COSMOS を使う方法
 * [COSMOS](https://www.gocosmos.org/) と呼ばれる C# で OS を開発する為のフレームワークがある。
@@ -81,7 +96,7 @@ Copyright (C) 2022 Takym.
 	* インストール作業の手間を無視すれば、実質的には欠点は無いと考えられる。
 
 ## 結論
-* .NET 7 と C# を用いて OS を開発する事は可能である。
+* 困難ではあるものの .NET 7 と C# を用いて OS を開発する事は可能である。
 * ただし、選択した方法によっては、C/C++ で開発する時よりも多くのコードを書く必要性が生じる場合もある。
 * .NET 7 と C# は OS 開発に利用される事が想定されていないという点を注意する必要がある。
 
@@ -93,8 +108,15 @@ Copyright (C) 2022 Takym.
 * [Native AOT deployment overview - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/core/deploying/native-aot/)
 * [dotnet-5.0におけるNativeAOTについて - Qiita](https://qiita.com/skitoy4321/items/2c746446e48672b5c735)
 * [dotnet-6.0におけるNativeAOTについて - Qiita](https://qiita.com/yaju/items/d5a771f3f00672aa19ff)
-* [zerosharp/efi-no-runtime at master · MichalStrehovsky/zerosharp](https://github.com/MichalStrehovsky/zerosharp/tree/master/efi-no-runtime)
+* [zerosharp/efi-no-runtime at master · MichalStrehovsky/zerosharp](https://github.com/MichalStrehovsky/zerosharp/tree/master/efi-no-runtime) (GitHub)
+* [dotnet/runtime: .NET is a cross-platform runtime for cloud, mobile, desktop, and IoT apps.](https://github.com/dotnet/runtime) (GitHub)
+* [dotnet/roslyn: The Roslyn .NET compiler provides C# and Visual Basic languages with rich code analysis APIs.](https://github.com/dotnet/roslyn) (GitHub)
+* [.NET Compiler Platform SDK (Roslyn API) | Microsoft Learn](https://learn.microsoft.com/dotnet/csharp/roslyn-sdk/)
+* [アプリケーション配置用に単一ファイルを作成する - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/core/deploying/single-file/overview)
 * [COSMOS - COSMOS](https://www.gocosmos.org/)
+
+## 脚注
+[^1]: [.NET Glossary](https://github.com/dotnet/runtime/blob/main/docs/project/glossary.md) には「Platform Adaptation Layer」と書かれているが、「Platform Abstraction Layer」と表現される場合もある。厳密な使い分けがある可能性もあるが、有力な情報は得られなかった。
 
 ## 余談
 * これまでの記事は敬体で書いていましたが、今回は常体で書きました。そのため少し不安が残ります。
