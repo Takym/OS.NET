@@ -1,6 +1,8 @@
 # .NET 7 と C# を用いて OS を開発する事はできるのか？
 Copyright (C) 2022 Takym.
 
+（この記事は更新されません。[こちら](https://takym.github.io/blog/general/2022/12/25/osdotnet.html)をご覧ください。）
+
 ## 目的
 * この記事は「[自作OS Advent Calendar 2022](https://adventar.org/calendars/8392)」の12月25日に向けて執筆した。
 
