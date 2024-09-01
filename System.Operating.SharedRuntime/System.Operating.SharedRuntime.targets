@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Project>
+<!--
+ - OS.NET
+ - Copyright (C) 2024 Takym.
+ -
+ - distributed under the MIT License.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<__SHRTPropsImported Condition="'$(__SHRTPropsImported)'==''">false</__SHRTPropsImported>
+	</PropertyGroup>
+	<Import Condition="!$(__SHRTPropsImported)" Project="$(MSBuildThisFileDirectory)System.Operating.SharedRuntime.props" />
+	<ItemGroup>
+		<Compile Include="$(SHRTPath)**/*.cs" Exclude="$(SHRTPath)bin/**/*.cs;$(SHRTPath)obj/**/*.cs" Link="$(SHRTRoot)%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+</Project>

@@ -7,7 +7,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<RootNamespace>System</RootNamespace>
 	</PropertyGroup>
 	<PropertyGroup Label="UEFI">
 		<PublishAot>true</PublishAot>
@@ -22,6 +21,7 @@
 		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<RuntimeMetadataVersion>OS.NET</RuntimeMetadataVersion>
 	</PropertyGroup>
+	<Import Project="../System.Operating.SharedRuntime/System.Operating.SharedRuntime.targets" Label="SharedRuntime" />
 	<Target Name="ClearReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
 		<ItemGroup>
 			<ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
