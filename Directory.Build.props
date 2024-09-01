@@ -2,18 +2,18 @@
 <!DOCTYPE Project>
 <!--
  - OS.NET
- - Copyright (C) 2022 Takym.
+ - Copyright (C) 2024 Takym.
  -
  - distributed under the MIT License.
 -->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-		<StripSymbols>true</StripSymbols>
+		<NoWarn>$(NoWarn);IDE0290</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<Optimize>false</Optimize>

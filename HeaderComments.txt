@@ -1,41 +1,48 @@
 /****
  * OS.NET
- * Copyright (C) 2022 Takym.
+ * Copyright (C) 2024 Takym.
  *
  * distributed under the MIT License.
 ****/
 
 <!--
  - OS.NET
- - Copyright (C) 2022 Takym.
+ - Copyright (C) 2024 Takym.
  -
  - distributed under the MIT License.
 -->
 
 @****
  * OS.NET
- * Copyright (C) 2022 Takym.
+ * Copyright (C) 2024 Takym.
  *
  * distributed under the MIT License.
 ****@
 
 #|
 	OS.NET
-	Copyright (C) 2022 Takym.
+	Copyright (C) 2024 Takym.
 
 	distributed under the MIT License.
 |#
 
 @REM ================================================================
 @REM OS.NET
-@REM Copyright (C) 2022 Takym.
+@REM Copyright (C) 2024 Takym.
 @REM
 @REM distributed under the MIT License.
 @REM ================================================================
 
 #================================================================
 # OS.NET
-# Copyright (C) 2022 Takym.
+# Copyright (C) 2024 Takym.
 #
 # distributed under the MIT License.
 #================================================================
+
+;================================================================
+; OS.NET
+; Copyright (C) 2024 Takym.
+;
+; distributed under the MIT License.
+;================================================================

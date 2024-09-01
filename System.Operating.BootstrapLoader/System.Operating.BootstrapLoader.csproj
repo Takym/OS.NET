@@ -1,0 +1,47 @@
+﻿<!--
+ - OS.NET
+ - Copyright (C) 2024 Takym.
+ -
+ - distributed under the MIT License.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>System</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Label="UEFI">
+		<PublishAot>true</PublishAot>
+		<PublishTrimmed>true</PublishTrimmed>
+		<SelfContained>true</SelfContained>
+		<LinkerSubsystem>EFI_APPLICATION</LinkerSubsystem>
+		<EntryPointSymbol>UefiMain</EntryPointSymbol>
+		<IlcSystemModule>System.Operating.BootstrapLoader</IlcSystemModule>
+		<NoStdLib>true</NoStdLib>
+		<NoConfig>true</NoConfig>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<RuntimeMetadataVersion>OS.NET</RuntimeMetadataVersion>
+	</PropertyGroup>
+	<Target Name="ClearReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
+		<ItemGroup>
+			<ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
+			<ReferencePath Remove="@(ReferencePath)" />
+		</ItemGroup>
+	</Target>
+	<Target Name="ClearNativeLibraries" BeforeTargets="LinkNative" AfterTargets="SetupOSSpecificProps">
+		<PropertyGroup>
+			<ExportsFile/>
+		</PropertyGroup>
+		<ItemGroup>
+			<AdditionalNativeLibraryDirectories Remove="@(AdditionalNativeLibraryDirectories)" />
+			<LinkerArg Remove="@(LinkerArg)" />
+			<LinkerArg Include="/SUBSYSTEM:$(LinkerSubsystem)" />
+			<LinkerArg Include="/ENTRY:$(EntryPointSymbol) /NOEXP /NOIMPLIB" />
+		</ItemGroup>
+	</Target>
+	<Target Name="RemoveHostConfigurationOptions" BeforeTargets="WriteIlcRspFileForCompilation" DependsOnTargets="PrepareForILLink">
+		<ItemGroup>
+			<RuntimeHostConfigurationOption Remove="@(RuntimeHostConfigurationOption)" />
+		</ItemGroup>
+	</Target>
+</Project>
