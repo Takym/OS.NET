@@ -4,8 +4,4 @@
  -
  - distributed under the MIT License.
 -->
-<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-	</PropertyGroup>
-</Project>
+<Project Sdk="Microsoft.NET.Sdk"/>

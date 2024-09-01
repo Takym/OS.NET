@@ -15,6 +15,13 @@
 		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 		<NoWarn>$(NoWarn);IDE0290</NoWarn>
 	</PropertyGroup>
+	<PropertyGroup Label="NoRuntime">
+		<NoStdLib>true</NoStdLib>
+		<NoConfig>true</NoConfig>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<RuntimeMetadataVersion>OS.NET</RuntimeMetadataVersion>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<Optimize>false</Optimize>
 		<DebugType>portable</DebugType>

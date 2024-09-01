@@ -11,4 +11,10 @@
 		<Compile Remove="**/*.old.cs" />
 		<None Include="**/*.old.cs" />
 	</ItemGroup>
+	<Target Name="ClearReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
+		<ItemGroup>
+			<ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
+			<ReferencePath Remove="@(ReferencePath)" />
+		</ItemGroup>
+	</Target>
 </Project>

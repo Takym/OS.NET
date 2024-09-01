@@ -6,28 +6,15 @@
 -->
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-	</PropertyGroup>
-	<PropertyGroup Label="UEFI">
+		<!--<OutputType>Exe</OutputType>-->
 		<PublishAot>true</PublishAot>
 		<PublishTrimmed>true</PublishTrimmed>
 		<SelfContained>true</SelfContained>
 		<LinkerSubsystem>EFI_APPLICATION</LinkerSubsystem>
 		<EntryPointSymbol>UefiMain</EntryPointSymbol>
 		<IlcSystemModule>System.Operating.BootstrapLoader</IlcSystemModule>
-		<NoStdLib>true</NoStdLib>
-		<NoConfig>true</NoConfig>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-		<RuntimeMetadataVersion>OS.NET</RuntimeMetadataVersion>
 	</PropertyGroup>
 	<Import Project="../System.Operating.SharedRuntime/System.Operating.SharedRuntime.targets" Label="SharedRuntime" />
-	<Target Name="ClearReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
-		<ItemGroup>
-			<ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
-			<ReferencePath Remove="@(ReferencePath)" />
-		</ItemGroup>
-	</Target>
 	<Target Name="ClearNativeLibraries" BeforeTargets="LinkNative" AfterTargets="SetupOSSpecificProps">
 		<PropertyGroup>
 			<ExportsFile/>
@@ -43,5 +30,9 @@
 		<ItemGroup>
 			<RuntimeHostConfigurationOption Remove="@(RuntimeHostConfigurationOption)" />
 		</ItemGroup>
+	</Target>
+	<Target Name="CopyAppFile" AfterTargets="CopyNativeBinary" Inputs="$(PublishDir)$(TargetName)$(NativeBinaryExt)" Outputs="$(DiskRootDir)$(AppFileName)">
+		<Copy SourceFiles="$(PublishDir)$(TargetName)$(NativeBinaryExt)" DestinationFiles="$(DiskRootDir)$(AppFileName)" />
+		<Exec Command="echo &quot;Copied: $(PublishDir)$(TargetName)$(NativeBinaryExt) ---&gt; $(DiskRootDir)$(AppFileName)&quot;" />
 	</Target>
 </Project>

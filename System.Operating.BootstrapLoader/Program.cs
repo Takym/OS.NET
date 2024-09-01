@@ -14,6 +14,6 @@ namespace System.Operating.BootstrapLoader
 		[RuntimeExport(nameof(UefiMain))]
 		private static long UefiMain(IntPtr ImageHandle, IntPtr SystemTable) => 0;
 
-		private static int Main() => 0;
+		//private static int Main() => 0;
 	}
 }
