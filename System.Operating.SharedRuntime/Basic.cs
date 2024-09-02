@@ -11,6 +11,8 @@ namespace System
 
 	public sealed class String;
 
+	public class Exception;
+
 	public abstract class ValueType;
 	public abstract class Enum : ValueType;
 	public abstract class Array;
@@ -39,6 +41,9 @@ namespace System
 
 	[AttributeUsage(AttributeTargets.Enum, Inherited = false)]
 	public class FlagsAttribute : Attribute;
+
+	[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = true)]
+	public sealed class ParamArrayAttribute : Attribute;
 
 	public struct RuntimeTypeHandle;
 	public struct RuntimeMethodHandle;

@@ -13,11 +13,12 @@
 		<LinkerSubsystem>EFI_APPLICATION</LinkerSubsystem>
 		<EntryPointSymbol>UefiMain</EntryPointSymbol>
 		<IlcSystemModule>System.Operating.BootstrapLoader</IlcSystemModule>
+		<DefineConstants>$(DefineConstants);UEFI</DefineConstants>
 	</PropertyGroup>
 	<Import Project="../System.Operating.SharedRuntime/System.Operating.SharedRuntime.targets" Label="SharedRuntime" />
 	<Target Name="ClearNativeLibraries" BeforeTargets="LinkNative" AfterTargets="SetupOSSpecificProps">
 		<PropertyGroup>
-			<ExportsFile/>
+			<ExportsFile />
 		</PropertyGroup>
 		<ItemGroup>
 			<AdditionalNativeLibraryDirectories Remove="@(AdditionalNativeLibraryDirectories)" />
