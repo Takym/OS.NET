@@ -2,10 +2,10 @@
 Copyright (C) 2024 Takym.
 
 ## 概要
-C# と .NET を用いて UEFI アプリケーションを開発する。
+C# と .NET を用いて UEFI アプリケーションを開発しています。
 
 ## 命名について
-* 最初は DotNetOS (略称は DNOS) にしようと思ったが、既に使われていた為、OS.NET にした。
+* 最初は DotNetOS (略称は DNOS) にしようと思ったのですが、既に使われていたので OS.NET にしました。
 * <https://dotnetos.org/>
 
 ## 参考文献
