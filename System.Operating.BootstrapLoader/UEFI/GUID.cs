@@ -18,7 +18,7 @@ namespace System.Operating.BootstrapLoader.UEFI
 		public Data4Type Data4;
 
 		[StructLayout(LayoutKind.Explicit, Size = 8, Pack = 1)]
-		public struct Data4Type // TODO: IEnumerable
+		public struct Data4Type // TODO: IEnumerable & InlineArray
 		{
 			[FieldOffset(0)]
 			public ulong Value;
