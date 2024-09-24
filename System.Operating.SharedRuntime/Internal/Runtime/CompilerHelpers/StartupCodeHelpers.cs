@@ -1,4 +1,4 @@
-﻿/****
+/****
  * OS.NET
  * Copyright (C) 2024 Takym.
  *
@@ -9,6 +9,7 @@
 #pragma warning disable IDE0130 // Namespace がフォルダー構造と一致しません
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -27,6 +28,7 @@ namespace Internal.Runtime.CompilerHelpers
 		[RuntimeExport(nameof(RhpPInvokeReturn))]
 		private static void RhpPInvokeReturn(IntPtr frame) { }
 
+		[DoesNotReturn()]
 		[RuntimeExport(nameof(RhpFallbackFailFast))]
 		private static void RhpFallbackFailFast()
 			=> ProgramLifetimeManager.Fail();
