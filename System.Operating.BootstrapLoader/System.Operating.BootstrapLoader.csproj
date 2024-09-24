@@ -1,4 +1,4 @@
-﻿<!--
+<!--
  - OS.NET
  - Copyright (C) 2024 Takym.
  -
@@ -13,10 +13,26 @@
 		<LinkerSubsystem>EFI_APPLICATION</LinkerSubsystem>
 		<EntryPointSymbol>UefiMain</EntryPointSymbol>
 		<IlcSystemModule>System.Operating.BootstrapLoader</IlcSystemModule>
-		<DefineConstants>$(DefineConstants);UEFI</DefineConstants>
+		<DefineConstants>$(DefineConstants);UEFI;HALT_LOOP_ENABLED</DefineConstants>
 	</PropertyGroup>
+	<ItemGroup>
+		<NasmFile Include="**/*.asm" Exclude="bin/**/*.asm;obj/**/*.asm" Format="win64" />
+	</ItemGroup>
 	<Import Project="../System.Operating.SharedRuntime/System.Operating.SharedRuntime.targets" Label="SharedRuntime" />
-	<Target Name="ClearNativeLibraries" BeforeTargets="LinkNative" AfterTargets="SetupOSSpecificProps">
+	<Target Name="PrepareNasmFiles" BeforeTargets="CompileNasmFiles">
+		<PropertyGroup>
+			<NasmOutputPath Condition="'$(NasmOutputPath)'==''">$(IntermediateOutputPath)nasm/</NasmOutputPath>
+		</PropertyGroup>
+	</Target>
+	<Target Name="CompileNasmFiles" AfterTargets="PrepareNasmFiles" BeforeTargets="ClearNativeLibraries" Inputs="@(NasmFile)" Outputs="@(NasmFile->'$(NasmOutputPath)%(RecursiveDir)%(Filename).lst');@(NasmFile->'$(NasmOutputPath)%(RecursiveDir)%(Filename).obj')">
+		<ItemGroup>
+			<NasmList   Include="@(NasmFile->'$(NasmOutputPath)%(RecursiveDir)%(Filename).lst')" Format="%(Format)" />
+			<NasmObject Include="@(NasmFile->'$(NasmOutputPath)%(RecursiveDir)%(Filename).obj')" Format="%(Format)" />
+		</ItemGroup>
+		<MakeDir Directories="$(NasmOutputPath)%(NasmFile.RecursiveDir)" />
+		<Exec Command="nasm &quot;%(NasmFile.Identity)&quot; -l &quot;$(NasmOutputPath)%(RecursiveDir)%(Filename).lst&quot; -o &quot;$(NasmOutputPath)%(RecursiveDir)%(Filename).obj&quot; -f &quot;%(Format)&quot;" />
+	</Target>
+	<Target Name="ClearNativeLibraries" AfterTargets="SetupOSSpecificProps" BeforeTargets="LinkNative">
 		<PropertyGroup>
 			<ExportsFile />
 		</PropertyGroup>
@@ -25,6 +41,7 @@
 			<LinkerArg Remove="@(LinkerArg)" />
 			<LinkerArg Include="/SUBSYSTEM:$(LinkerSubsystem)" />
 			<LinkerArg Include="/ENTRY:$(EntryPointSymbol) /NOEXP /NOIMPLIB" />
+			<LinkerArg Condition="'%(NasmObject.Format)'=='$(NasmFormat)'" Include="&quot;%(Identity)&quot;" />
 		</ItemGroup>
 	</Target>
 	<Target Name="RemoveHostConfigurationOptions" BeforeTargets="WriteIlcRspFileForCompilation" DependsOnTargets="PrepareForILLink">
@@ -34,6 +51,6 @@
 	</Target>
 	<Target Name="CopyAppFile" AfterTargets="CopyNativeBinary" Inputs="$(PublishDir)$(TargetName)$(NativeBinaryExt)" Outputs="$(DiskRootDir)$(AppFileName)">
 		<Copy SourceFiles="$(PublishDir)$(TargetName)$(NativeBinaryExt)" DestinationFiles="$(DiskRootDir)$(AppFileName)" />
-		<Exec Command="echo &quot;Copied: $(PublishDir)$(TargetName)$(NativeBinaryExt) ---&gt; $(DiskRootDir)$(AppFileName)&quot;" />
+		<Exec Command="rem &quot;Copied: $(PublishDir)$(TargetName)$(NativeBinaryExt) ---&gt; $(DiskRootDir)$(AppFileName)&quot;" />
 	</Target>
 </Project>
