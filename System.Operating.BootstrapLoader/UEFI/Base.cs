@@ -40,4 +40,15 @@ namespace System.Operating.BootstrapLoader.UEFI
 			Value = value;
 		}
 	}
+
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public readonly struct EFIHandle
+	{
+		public readonly nuint Value;
+
+		public EFIHandle(nuint value)
+		{
+			Value = value;
+		}
+	}
 }
