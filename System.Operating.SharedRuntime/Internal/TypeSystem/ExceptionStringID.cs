@@ -9,5 +9,7 @@
 
 namespace Internal.TypeSystem
 {
+	// TODO: https://github.com/dotnet/runtime/blob/main/src/coreclr/tools/Common/TypeSystem/Common/ExceptionStringID.cs
+
 	internal enum ExceptionStringID;
 }

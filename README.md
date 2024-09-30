@@ -18,3 +18,4 @@ C# と .NET を用いて UEFI アプリケーションを開発しています�
 * <https://github.com/MichalStrehovsky/zerosharp/tree/master/efi-no-runtime>
 * <https://uefi.org/specs/UEFI/2.10_A/>
 * <https://github.com/tianocore/edk2/tree/edk2-stable202408>
+* <https://github.com/dotnet/runtime>

@@ -90,7 +90,7 @@ namespace System.Diagnostics.CodeAnalysis
 		public MemberNotNullWhenAttribute(bool returnValue, string member)
 		{
 			this.ReturnValue = returnValue;
-			this.Members     = [member];
+			this.Members     = [ member ];
 		}
 
 		public MemberNotNullWhenAttribute(bool returnValue, params string[] members)
